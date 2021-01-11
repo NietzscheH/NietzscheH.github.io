@@ -1,1 +1,627 @@
-Hellow World
+# 3.1 Differentiation
+
+###### Def. (differentiable)
+
+​	The function $f:(a,b)\to \R$ is differentiable at $x$ if
+$$
+\lim_{t\to x} \frac{f(t)-f(x)}{t-x}=L
+$$
+exists. The limit $L$ is the derivative of $f$ at $x$, $L=f'(x)$.
+
+- Rm. In the sense of $\epsilon-\delta$ condition, $t$ is in ==$B_\delta(x)-\{x\}$== (punctured open ball); in the sense of sequential convergence, the sequence is in ==$(a,b)-\{x\}$==.
+
+###### Them. (rules of differentiation)
+
+1. Differentiability implies continuity.
+2. If $f$ and $g$ are differentiable at $x$ then so is $f+g$, and the derivative is $(f+g)'(x)=f'(x)+g'(x)$.
+3. If $f,g$ are differentiable at $x$, then so is $f\cdot g$. The derivative is given by **Leibniz Formula** $(f\cdot g)'(x)=f'(x)\cdot g(x)+f(x)\cdot g'(x)$.
+4. The derivative of a constant is 0.
+5. If $f,g$ are differentiable at $x$ and $g(x)\ne 0$, then the ratio $\frac{f}{g}$ is differentiable at $x$. The derivative is given by $(\frac{f}{g})'(x)=\frac{f'(x)\cdot g(x)-g'(x)\cdot f(x)}{g(x)^2}$.
+6. If $f$ is differentiable at $x$ and $g$ is differentiable at $f(x)$, then the Chain Rule holds: $(g\circ f)'(x)=g'(f(x))\cdot f'(x)$.
+
+- Proof: 
+
+    1. BWC. Suppose $f$ is not continuous at $x$, then $\exist\epsilon>0$ s.t. $\forall \delta>0$ there is an $t$ s.t. $|t-x|<\delta$ and $|f(t)-f(x)|\ge \epsilon$. It then follows that $f$ cannot be differentiable at $x$, CONTR.
+
+    2. Obv.
+
+    3. We have 
+        $$
+        \lim_{t\to x}\frac{f(t)g(t)-f(x)g(x)}{t-x}=\lim_{t\to x}\frac{f(t)g(t)-f(x)g(t)+f(x)g(t)-f(x)g(x)}{t-x}\\=\lim_{t\to x}(g(t)\frac{f(t)-f(x)}{t-x}+f(x)\frac{g(t)-g(x)}{t-x})=f'(x)g(x)+f(x)g'(x)
+        $$
+        as *multiplication and addition are continuous functions*.
+
+    4. Obv.
+
+    5. Let $h=\frac{f}{g}$. Thus $f=hg$ and, by 3., we have $f'=h'g+hg'=h'g+\frac{f}{g}g'$. Thus $h'=\frac{f'g-g'f}{g^2}$.
+
+        Or:
+        $$
+        \begin{align*}
+        \lim_{t\to x}\frac{\frac{f(t)}{g(t)}-\frac{f(x)}{g(x)}}{t-x}=&\lim_{t\to x}\frac{\frac{f(t)g(x)-f(x)g(t)}{g(t)g(x)}}{t-x}\\=&\lim_{t\to x}\frac{f(t)g(x)-f(x)g(x)+f(x)g(x)-f(x)g(t)}{(t-x)g(t)g(x)}\\=&\lim_{t\to x}\frac{f'(x)g(x)-f(x)g'(x)}{g(t)g(x)}\\=&\frac{f'(x)g(x)-g'(x)f(x)}{g(x)^2}
+        \end{align*}
+        $$
+
+    6. We have 
+        $$
+        \lim_{t\to x}\frac{(g\circ f)(t)-(g\circ f)(x)}{t-x}=\lim_{t\to x}\frac{g(f(t))-g(f(x))}{t-x}=\lim_{t\to x}\frac{g(f(t))-g(f(x))}{f(t)-f(x)}\frac{f(t)-f(x)}{t-x}=g'(f(x))f'(x)
+        $$
+
+###### ==Lemma==
+
+​	If $f:(a,b)\to \R$ is differentiable and achieves a minimum or maximum at some $x\in(a,b)$, then $f'(x)=0$.
+
+- Proof: Suppose $f$ achieves minimum at $x$. Consider $f'(x)=\lim_{t\to x}\frac{f(t)-f(x)}{t-x}$. Note that $f(t)-f(x)$ is always non-negative as $f(x)$ is a minimum, while $t-x$ can be positive or negative. By the sequential convergence, this limit, $f'(x)$, must be 0.
+
+###### Mean Value Theorem
+
+​	A continuous function $f:[a,b]\to \R$ that is differentiable on $(a,b)$ has the mean value property: $\exist\theta\in(a,b)$ s.t. 
+$$
+\frac{f(b)-f(a)}{b-a}=f'(\theta)
+$$
+
+- Proof: Let $S=\frac{f(b)-f(a)}{b-a}$ and construct a new function $g(x)=f(x)-S(x-a)$. Notice that $g$ is also differentiable on $(a,b)$, and $g(a)=f(a)=g(b)$. Therefore, as $Im(g)$ is compact, $g$ must has a maximum or minimum at $\theta\in(a,b)$. Thus $\exist\theta\in (a,b)$ s.t. $g'(\theta)=f'(\theta)-S=0$. We have $f'(\theta)=S$.
+
+###### Cor.
+
+​	If $f$ is differentiable and $|f'(x)|\le M$ for all $x\in (a,b)$, then $f$ satisfies the global Lipschitz condition: for all $t,x\in(a,b)$, we have $|f(t)-f(x)|\le M|t-x|$.
+
+- Proof: We have $f(t)-f(x)=f'(\theta)(t-x)\le M(t-x)$ for some $\theta\in(t,x)$.
+- Cor. If $f$ is continuous on $[a,b]$ and $f'(x)=0$ for all $x\in(a,b)$, then $f$ is constant on $[a,b]$.
+
+###### Ratio Mean Value Theorem
+
+​	For $f,g$ continuous on $[a,b]$ and differentiable on $(a,b)$, $\exist\theta\in(a,b)$ s.t. $\frac{f(b)-f(a)}{g(b)-g(a)}=\frac{f'(\theta)}{g'(\theta)}$.
+
+- Proof: Construct function $\phi(x)=(f(b)-f(a))\cdot(g(x)-g(a))-(g(b)-g(a))\cdot (f(x)-f(a))$. We have $\phi(a)=0=\phi(b)$. Thus there must be $\theta\in (a,b)$ s.t. $\phi'(\theta)=0$.
+
+###### ==L'Hopital's Rule==
+
+​	If $f,g$ are both differentiable on $(a,b)$ and both tend to 0 at $b$, and if the ration of their derivatives $\frac{f'(x)}{g'(x)}$ tends to a finite limit $L$ at $b$, then $\frac{f(x)}{g(x)}$ also tends to $L$ at $b$ (assuming $g(x),g'(x)\ne 0$).
+
+- Proof: For any $\epsilon>0$, let $\delta>0$ be such that, if $x\in(b-\delta,b)$, then
+    $$
+    |\frac{f'(x)}{g'(x)}-L|<\frac{\epsilon}{2}
+    $$
+    For each $x\in(b-\delta,b)$, determine a $t\in(b-\delta,b)$ s.t. 
+    $$
+    |f(t)|+|g(t)|<\frac{g(x)^2\epsilon}{4(|f(x)|+|g(x)|)}\\|g(t)|<\frac{|g(x)|}{2}
+    $$
+    Since $f(t),g(t)$ tend to 0 as $t$ tends to $b$ and $g(x)\ne 0$, such $t$ exists. We have
+    $$
+    \begin{align*}
+    |\frac{f(x)}{g(x)}-L|=&|\frac{f(x)}{g(x)}-\frac{f(x)-f(t)}{g(x)-g(t)}+\frac{f(x)-f(t)}{g(x)-g(t)}-L|\\ \le&|\frac{g(x)f(t)-f(x)g(t)}{g(x)(g(x)-g(t))}|+|\frac{f'(\theta)}{g'(\theta)}-L|<\epsilon
+    \end{align*}
+    $$
+    (Notice that $\frac{|g(x)|}{2}<|g(x)|-|g(t)|\le |g(x)-g(t)|$)
+
+- Proof (Vasiu): Construct $\tilde f,\tilde g$ defined on $(a,b]$ with $\tilde f(b),\tilde g(b)=0$. 
+
+    ​	Then $\lim_{x\to b}\frac{f(x)}{g(x)}=\lim_{x\to b}\frac{\tilde f(x)}{\tilde g(x)}=\lim_{x\to b}\frac{\tilde f(x)-\tilde f(b)}{\tilde g(x)-\tilde g(b)}=\lim_{\theta\to b}\frac{\tilde f'(\theta)}{\tilde g'(\theta)}=\lim_{\theta\to b}\frac{f'(\theta)}{g'(\theta)}$.
+
+- Rm. L'Hopital's Rule also holds when $x\to\infty$ or $f,g\to\infty$.
+
+###### ==Them. (intermediate value property of $f'$)==
+
+​	If $f$ is differentiable on $(a,b)$, then its derivative function $f'(x)$ has the intermediate value property.
+
+- Rm. A function with intermediate value property is called **Darboux continuous**.
+- Proof: If $f'(x_1)<f'(x_2)$ and $f'(x_1)<\gamma<f'(x_2)$, we want to find $\theta$ between $x_1,x_2$ s.t. $f'(\theta)=\gamma$. Consider $\sigma(x)=$the segment between $(x,f(x))$ and $(x+h,f(x+h))$, and $slope(\sigma)$ which is the slope of the segment. They are all continuous on $(x_1,x_2-h)$. When $h$ is small enough, then $slop(\sigma(x_1))=f'(x_1),slope(\sigma(x_2-h))=f'(x_2)$. Thus, there is some $x_3\in (x_1,x_2-h)$ s.t. $slope(\sigma(x_3))=\gamma=\frac{f(x_3+h)-f(x_3)}{h}$. Therefore $\exist\theta\in(x_3,x_3+h)$ s.t. $f'(\theta)=\gamma$.
+- Cor.: The derivative of a differentiable function never has a jump discontinuity (or it omits intermediate values).
+
+###### Def. (smooth)
+
+​	$f$ is smooth iff it is infinitely differentiable. The zero-th derivative is $f$ itself.
+
+##### Smoothness Classes
+
+​	<u>If $f$ is differentiable and $f'$ is continuous, then $f$ is continuously differentiable and we say that $f$ is of class $C^1$.</u> If $f$ is $r$-th order differentiable and $f^{(r)}$ is a continuous function, then $f$ is continuously $r$-th order differentiable and we say that $f $ is of class $C^r$. If $f$ is smooth, then we say that $f$ is of class $C^\infty$. And if $f$ is continuous, we say $f$ is of class $C^0$.
+
+- Rm. We have $C^0\supset C^1\supset...\supset \cap_{r\in \N} C^r=C^\infty$.
+
+###### Def. (diffeomorphism)
+
+​	We say $f$ is an $r$-th order diffeomorphism if it's of $C^r$ class and it's a homeomorphism, where its inverse is also of $C^r$ class.
+
+##### Analytic Functions
+
+​	A function that can be expressed locally as a **convergent** power series is analytic. We write $C^\omega$ as the class of analytic functions. ==Analytic functions are always smooth==.
+
+- Rm. There are smooth functions that are not analytic. E.g. $f(x)=e^{-\frac{1}{x}}$ with $f(x)=0\ \forall x\le 0$.
+- **Rm.** <u>Real analytic and complex analytic are very different.</u> In complex, analytic is equivalent to infinitely differentiable (holomorphic). But both analyticity means that the function can be expressed locally as a convergent power series.
+
+##### Taylor Approximation
+
+​	The $r$-th order Taylor polynomial of an $r-$th differentiable function $f$ at $x$ is
+$$
+P(h)=f(x)+f'(x)h+\frac{f''(x)}{2!}h^2+...+\frac{f^{(r)}(x)}{r!}h^r
+$$
+
+###### Taylor Approximation Theorem
+
+​	Let $f:(a,b)\to \R$ be $r$-th order differentiable at $x$. Then
+
+1. $P$ approximates $f$ to order $r$ at $x$ in the sense that he Taylor remainder
+    $$
+    R(h)=f(x+h)-P(h)
+    $$
+    is $r$-th order flat at $h=0$, i.e., $\frac{R(h)}{h^r}\to 0$ as $h\to 0$. (Rm. $R^n(0)=0$ for $n=0,1,...,r$)
+
+2. The Taylor polynomial is the only polynomial of degree $\le r$ with this approximation property.
+
+3. If, in addition, $f$ is $r+1$-th differentiable on $(a,b)$, then for some $\theta$ between $x,x+h$, we have
+    $$
+    R(h)=\frac{f^{(r+1)}(\theta)}{(r+1)!}h^{r+1}
+    $$
+    which is also called the Lagrange form of the remainder.
+
+- Proof:
+
+    1. Recursively apply Mean Value Theorem, we have $R(h)=R(h)-R(0)=R(h)-0=R'(\theta_1)h$, where $\theta_1$ is between $0,h$. Thus we have $|\frac{R(h)}{h^r}|=|\frac{R^{r-1}(\theta_{r-1})\theta_{r-2}...\theta_1 h}{h^r}|\le|\frac{R^{r-1}(\theta_{r-1})-0}{\theta_{r-1}}|=|R^r(\theta_r)|$, which is 0.
+
+    2. Suppose $Q\ne P$ is a polynomial of degree $\le r$ and has this approximation property at $h=0$. Let $Q-P=c_0+c_1h+...+c_rh^r$. We have $\frac{Q-P}{h^r}\to 0$. Thus each $c_i=0$, using L’Hopital.
+
+    3. We prove by PMI. Base case $r=0$: we have $P_0(h)=f(x)$, so $R_0(h)=f(x+h)-f(x)=f'(\theta)h$ for some $\theta$ between $x$ and $x+h$.
+
+        ​	Suppose true for some $r=n$. We check $r=n+1$ case.
+
+        ​	In case $r=n+1$, we have $f$ is ==$n+2$-th differentiable== and $P_{n+1}(h)=f(x)+f'(x)h+...+\frac{f^{(n+1)}(x)}{(n+1)!}h^{n+1}$. By induction hypothesis, we have $R_n(h)=f(x+h)-P_n(h)=\frac{f^{(n+1)}(\theta)}{(n+1)!}h^{n+1}$ for some $\theta$ between $x$ and $x+h$, while we also have
+        $$
+        R_n(h)=f(x+h)-P_{n+1}(h)+\frac{f^{(n+1)}(x)}{(n+1)!}h^{n+1}=R_{n+1}(h)+\frac{f^{(n+1)}(x)}{(n+1)!}h^{n+1}
+        $$
+        Thus
+        $$
+        R_{n+1}(h)=R_n(h)-\frac{f^{(n+1)}(x)}{(n+1)!}h^{n+1}=\frac{h^{n+1}}{(n+1)!}(f^{(n+1)}(\theta)-f^{(n+1)}(x))
+        $$
+        where $f^{(n+1)}(\theta)-f^{(n+1)}(x)=f^{(n+2)}(\theta')(\theta-x)$ for some $\theta'$ between $\theta$ and $x$. Hence we have
+        $$
+        f^{(n+1)}(\theta)-f^{(n+1)}(x)=f^{(n+2)}(\theta')(\theta-x)=\frac{\theta-x}{h}f^{(n+2)}(\theta')h
+        $$
+        Now, we have
+        $$
+        R_{n+1}(h)=\frac{h^{n+2}}{(n+1)!}\cdot \frac{\theta-x}{h}f^{(n+2)}(\theta')
+        $$
+        Let $k=\frac{\theta-x}{h}f^{(n+2)}(\theta')$. We have $k=\frac{R_{n+1}(h)}{h^{n+2}}(n+1)!$, where
+        $$
+        R_{n+1}(0)=R'_{n+1}(0)=...=R_{n+1}^{(n+1)}(0)=0,R_{n+1}^{(n+2)}(h)=f^{(n+2)}(x+h)
+        $$
+         Thus, by recursively using Ratio Mean Value Theorem, we have
+
+    $$
+    k=\frac{R_{n+1}(h)-0}{h^{n+2}-0}(n+1)!=\frac{R_{n+1}'(\delta)}{(n+2)\delta^{n+1}}(n+1)!=...=\frac{f^{(n+2)}(x+\epsilon)}{(n+2)!}(n+1)!
+    $$
+
+    ​	where $\epsilon$ is between 0 and $h$.
+
+    ​	We conclude that $R_{n+1}(h)=\frac{f^{(n+2)}(\theta)}{(n+2)!}h^{n+2}$ for some $\theta$ between $x$ and $x+h$. The case $r=n+1$ is true.
+
+    3. ![image-20201027131152932](C:\Users\Yuqiao\AppData\Roaming\Typora\typora-user-images\image-20201027131152932.png)
+
+- Cor.: For $e(x)=e^{-\frac{1}{x}}$ with $e(x)=0$ for $x\le 0$, we have $\lim_{h\to 0}\frac{e(h)}{h^r}=0$ for any $r\in \N$, since every derivative of $e(x)$ is 0 at $0$.
+
+##### Inverse Functions
+
+###### Them. (Inverse Function Theorem in dim=1)
+
+​	For differentiable surjective $f:(a,b)\to (c,d)$ where $f$ is monotone and $f'$ has no zero (thus it is a homeomorphism), its inverse is also differentiable and its derivative is
+$$
+(f^{-1})'(y)=\frac{1}{(f'\circ f^{-1})(y)}=\frac{1}{f'(x)}
+$$
+
+- Proof: We have $(f^{-1})'(y)=\lim_{t\to 0}\frac{f^{-1}(y+t)-f^{-1}(y)}{t}$. Let $x=f^{-1}(y)$ and $x+h=f^{-1}(y+t)$. Then we have $(f^{-1})'(y)=\lim_{t\to 0}\frac{h}{f(x+h)-f(x)}$. Note that, as $f^{-1}$ is continuous, $t\to 0$ implies $h\to 0$. Thus $(f^{-1})'(y)=\lim_{h\to 0}(\frac{f(x+h)-f(x)}{h})^{-1}=\frac{1}{f'(x)}$.
+
+- ==Cor.==: If $f:(a,b)\to (c,d)$ is a homeomorphism of class $C^r$ and $f'$ has no zero, then $f$ is a $C^r$ diffeomorphism.
+
+    - Proof: Use PMI. Base case $r=1$ clearly true, as we have $(f^{-1})'$ and it is continuous since it is a composite of continuous functions.
+
+        ​	Assume true for case $r$. Check $r+1$ case. For homeomorphism $f$ of class $C^{r+1}$, by induction hypothesis, $f^{-1}$ is of class $C^r$. <u>Using the quotient rule</u>, we have $(f^{-1})^{(r+1)}$ exists (on the bottom it has $(f'\circ f^{-1})^{r+1}$ and on the top it has a composite of functions involving $f,f^{-1}$, where $f$ is up to the order of $r+1$ and $f^{-1}$ is up to the order of $r$) and is continuous since it is still a composite of continuous functions.
+
+##### Riemann Integration
+
+​	Let $f:[a,b]\to\R$ be given with $f(x)\ge 0$. Intuitively, the integral of $f$ is the area under its graph.
+
+###### Riemann sum
+
+​	Let $P,T\subset[a,b]$ be ==2 finite sets== of points where $P=\{x_0,x_1,...,x_n\},T=\{t_1,...,t_n\}$ and are interlaced as $a=x_0\le t_1\le x_1\le t_2\le...\le t_n\le x_n=b$. We assume the points $x_0,...,x_n$ are disjoint. The *Riemann sum* corresponding to $f,P,T$ is
+$$
+R(f,P,T)=\sum_{i=1}^nf(t_i)\Delta x_i
+$$
+where $\Delta x_i=x_i-x_{i-1}$.
+
+​	The **mesh** of $P$ is the largest $\Delta x_i$. $T$ is also called sample points.
+
+​	A real number $I$ is the Riemann integral of $f$ over $[a,b]$ if it satisfies the following condition:
+$$
+\forall\epsilon>0,\exist\delta>0\text{ s.t }\forall\text{ partition pair }P,T\text{ we have }mesh(P)<\delta \Rightarrow |R-I|<\epsilon
+$$
+<span style="color: red">If such and $I$ exists and is unique, then we denote it as</span>
+$$
+\int_a^bf(x)dx=I=\lim_{mesh(P)\to 0}R(f,P,T)
+$$
+<span style="color: red">and we say $f$ is ==Riemann integrable== with Riemann integral $I$.</span>
+
+- Not.: $\mathcal R=\mathcal R_{[a,b]}$ is the set of all functions Riemann integrable on $[a,b]$.
+
+###### Them.
+
+​	If $f$ is Riemann integrable then it is bounded.
+
+- Proof: BWC. Let $I=\int_a^bf(x)dx$. Then $\exist\delta>0$ s.t. if $mesh(P)<\delta$, then $|R-I|<1$. Fix such a partition pair $P,T$. If $f$ is unbounded on $[a,b]$, then there is also a subinterval $[x_{i_0-1},x_{i_0}]$ on which $f$ is unbounded. Now, fix all $t_i$ but change $t_{i_0}$ to $t'_{i_0}$ s.t.
+    $$
+    |f(t'_{i_0})-f(t_{i_0})|\Delta x_{i_0}>2
+    $$
+    This can be done, as $f$ is unbounded on $[x_{i_0-1},x_{i_0}]$ and $\Delta x_{i_0},t_{i_0}$ are both fixed. Then $|R(f,P,T')-R(f,P,T)|>2$, but their difference should be less than 2, CONTR.
+
+###### Them. (Linearity of the Integral)
+
+​	$\mathcal R$ is a vector space and $f\to \int_a^b f(X)dx$ is a linear map $\mathcal R\to \R$.
+
+- Proof: $\mathcal R$ is a subset of all functions $[a,b]\to \R$. Check it is a subspace (nonempty, closure of addition, closure of scalar multiplication).
+
+###### Them. (Monotonicity)
+
+​	If $f,g\in\mathcal R$ and $f\le g$, then $\int_a^bfdx\le \int_a^bgdx$.
+
+- Proof: Obv. $R(f,P,T)\le R(g,P,T)$.
+
+---
+
+###### Characteristic of $A$
+
+​	For $A\subset B$, define $\chi_A$ be defined as $\chi_A(x)=0$ if $x\in B-A$, and $\chi_A(x)=1$ if $x\in A$.
+
+###### Def. (Step function)
+
+​	A function $f:[a,b]\to \R$ is called a step function if $[a,b]=\cup_{i=1}^nI_i$ and $f=\sum_{i=1}^nc_i\chi_{I_i}$.
+
+- Rm.: We can assume that $I_i$ is either an open interval or single point.
+
+- Rm.: Each step function $f:[a,b]\to\R$ is Riemann integrable.
+
+    Proof: It suffices to show that any $\chi_{I}$ is integrable, as $\mathcal R$ is a vector space. Case 1: $I=\{c\}$. We have $\chi_I(x)=0$ for all $x\in[a,b]-\{c\}$ and $\chi_I(c)=1$. We calculate $R(\chi_I,P,T)$, we have
+    $$
+    \begin{align*}
+    &R=0 \text{ if }c\notin T;\\&R=x_{i_0}-x_{i_0-1}\text{ if }t_{i_0}=c;\\&R=x_{i_0}-x_{i_0-2}\text{ if }t_{i_0}=t_{i_0-1}=c.
+    \end{align*}
+    $$
+    In either cases, we can make $R$ randomly close to 0 by bounding $mesh(P)$. Thus the integral value is 0.
+
+    Case 2: $I=(c,d)\subset [a,b]$. (My proof: We can think of $\chi_I$ as a function whose value is 1 on $[c,d]$ minus a function whose value is 1 at $c,d$ (and both are 0 on elsewhere of $[a,b]$). Both functions are integrable and thus $\chi_I$ is integrable and has integral value $d-c$) We have $R(\chi_I,P,T)=x_{i_n}-x_{i_m-1}$, where $t_{i}\in(c,d)$ for $i=i_m,...,i_n$ and $t_i\notin(c,d)$ for all other $i$, which is also equal to $(d-c)+(x_{i_n}-d)-(x_{i_m-1}-c)$. Notice that there is no $x_i$ between $c,x_{i_m-1}$ or between $d,x_{i_n}$. Thus, as $mesh(P)\to 0$, $|x_{i_n}-d|,|x_{i_m-1}-c|$ both go to 0. We conclude that $R(\chi_I,P,T)$ in this case is $d-c$.
+
+---
+
+##### Darboux Integrability
+
+​	The **lower sum** and **upper sum** of a function $f:[a,b]\to [-M,M]$ w.r.t. a partition $P$ of $[a,b]$ are
+$$
+L(f,P)=\sum_{i=1}^nm_1\Delta x_i\text{ and }U(f,P)=\sum_{i=1}^nM_i\Delta x_i
+$$
+where
+$$
+m_i=inf\{f(t)\ |\ x_{i-1}\le t\le x_i\},M_i=sup\{f(t)\ |\ x_{i-1}\le t\le x_i\}
+$$
+Note here that they are "inf" and "sup".
+
+​	We assume $f$ is bounded in order to be sure that $m_i,M_i$ are real numbers. Clearly we have $L(f,P)\le R(f,P,T)\le U(f,P)$.
+
+​	The **lower integral** and **upper integral** of $f$ over $[a,b]$ are
+$$
+\underline{I}=\text{sup}_PL(f,P),\overline I=\text{inf}_PU(f,P).
+$$
+$P$ ranges over all partitions of $[a,b]$. ==If $\underline I=\overline I$, then $f$ is **Darboux integrable** and their common value is its Darboux integral==.
+
+###### Refinement
+
+​	A partition $P'$ refines $P$ is $P'\supset P$.
+
+- Rm. Refining a partition causes the lower sum to increase (to be greater or unchanged) and the upper sum to decrease (to be smaller or unchanged). This can be rigorously proven by induction.
+- Rm. **Common refinement** $P^*$ of 2 partitions $P,P'$ of $[a,b]$ is $P^*=P\cup P'$.
+- Rm. $L(f,P)\le L(f,P^*)\le U(f,P^*)\le U(f,P')$, i.e., each lower sum is less than or equal to each upper sum. Thus $\underline I\le \overline I$.
+
+###### ==Remark.==
+
+​	A bounded function $f:[a,b]\to \R$ is Darboux integrable iff $\forall \epsilon>0,\exist P$ s.t. $U(f,P)-L(f,P)<\epsilon$.
+
+- Proof: "If" We have $L(f,P)\le\underline I\le\overline I\le U(f,P)$. "Only if" We have $\underline I=\overline I$. For any $\epsilon$, $\exist P_1$ s.t. $\underline I-L(f,P_1)<\frac{\epsilon}{2}$. Also, $\exist P_2$ s.t. $U(f,P_2)-\overline I<\frac{\epsilon}{2}$. Let $P=P_1\cup P_2$. We have $U(f,P)-L(f,P)<\epsilon$.
+
+###### Them. (Riemann = Darboux)
+
+​	Riemann integrability is equivalent to Darboux integrability, and when a function is integrable, its three integrals - lower, upper, and Riemann - are equal.
+
+- Proof: "RI to DI" For any $\epsilon>0$, let $\delta>0$ be s.t. $|R(f,P,T)-I|<\frac{\epsilon}{4}$ if $mesh(P)<\delta$. Fix $P$ and choose $T$ s.t. $|R(f,P,T)-L(f,P)|<\frac{\epsilon}{4}$; choose a new $T'$ s.t. $|R(f,P,T')-U(f,P)|<\frac{\epsilon}{4}$. Therefore $U-L=(U-R')+(R'-I)+(I-R)+(R-L)<\epsilon$.
+
+    ​	"DI to RI" 
+
+###### Sandwich Principle
+
+​	$f:[a,b]\to\R$ is Riemann integrable if, for any $\epsilon>0$, $\exist g,h\in\mathcal R$ s.t. $g\le f\le h$ and $\int_a^bh(x)-g(x)dx\le \epsilon$.
+
+- Proof: For any $P$, we have $L(g,P)\le L(f,P)\le U(f,P)\le U(h,P)$. For any $\epsilon>0$, let $h,g$ be such that $\int_a^bh(x)-g(x)dx\le \frac{\epsilon}{3}$ and let $\delta>0$ be s.t. if $mesh(P)<\delta$, then $\int_a^bg(x)dx-L(g,P)<\frac{\epsilon}{3}$ and $U(h,P)-\int_a^bh(x)dx<\frac{\epsilon}{3}$. Thus $\int_a^bg(x)dx-\frac{\epsilon}{3}<L(g,P)\le L(f,P)\le U(f,P)\le U(h,P)<\int_a^bh(x)dx+\frac{\epsilon}{3}$, which results in $U(f,P)-L(f,P)<\epsilon$. Thus $f$ is Darboux integrable.
+
+###### An important example
+
+​	If $f:[a,b]\to\R$ be continuous, then $f$ is Riemann integrable.
+
+- Proof: Notice that $f$ is uniformly continuous since it's continuous and defined on a compact set. For any $\epsilon>0$, let $\epsilon':=\frac{\epsilon}{b-a}$. Let $\delta>0$ be such that $|f(x)-f(y)|<\epsilon'$ if $|x-y|<\delta$. Let partition $P$ be such that $mesh(P)<\delta$. As $f$ is continuous on each compact $[x_{i-1},x_i]$, it assumes its maximum and minimum on each interval. Therefore, $M_i=f(u_i),m_i=f(v_i)$ for some $u_i,v_i\in[x_{i-1},x_i]$ for all $i$. Thus we have $0\le U(f,P)-L(f,P)=\sum_{i=1}^n(M_i-m_i)\Delta x_i<\epsilon'(b-a)=\epsilon$. Hence $f$ is Darboux integrable, so Riemann integrable.
+
+###### Def. (zero set)
+
+​	A set $Z\subset\R$ is a zero set (a set of measure zero) if for each $\epsilon>0$, $\exist$ a countable covering of $Z$ by open intervals $(a_i,b_i)$ s.t. $\sum_{i=1}^\infty b_i-a_i\le \epsilon$.
+
+​	This sum is the *total length* of the covering. If a property holds for all points except those in a zero set, then we say that the property holds *almost everywhere*, abbreviated "a.e."
+
+- Rm. Every finite subset of $\R$ is a zero set; make the lengths of the intervals a ratio sequence.
+
+- Examples of zero sets:
+
+    1. Every subset of a zero set;
+    2. Every finite set;
+    3. Every countable union of zero sets;
+    4. Every countable set;
+    5. The middle-thirds Cantor set.
+
+    - Proof: 1 and 2 are obvious. 3 Construct a ratio sequence whose sum converges to $\epsilon$ and then let each zero set have its total length less than or equal to each term. E.g. $\frac{\epsilon}{2^n}$. 5 Remember that each $C^n$ comprises of $2^n$ closed intervals of length $\frac{1}{3^n}$. Thus for any $\epsilon>0$, we find $n$ s.t. $\frac{2^n}{3^n}<\epsilon$. Enlarge each closed interval $I_i$ of $C^n$ to an open interval of length $\frac{\epsilon}{2^n}>\frac{1}{3^n}$. We have the total length is $\epsilon$.
+
+###### Def. (Discontinuity and oscillation)
+
+​	$Disc(f)=\{x\in(a,b)\ |\ f\text{ is not continuous at }x\}$.
+
+​	$osc_x(f)=\lim_{r\to 0}diam(f([x-r,x+r]))$. The oscillation of $f$ at $x$. $osc_x(f)=0$ iff $f$ is continuous at $x$.
+
+E.g.:![image-20201105140417583](C:\Users\Yuqiao\AppData\Roaming\Typora\typora-user-images\image-20201105140417583.png)
+
+###### ==Them. (Riemann-Lebesgue Theorem)==
+
+​	A function $f:[a,b]\to\R$ is Riemann integrable iff it is bounded and its set of discontinuity points is a zero set.
+
+- Proof: We have $Disc(f)=D=\cup_{k=1}^\infty D_k$ where $D_k=\{x\in[a,b]\ |\ osc_x(f)\ge \frac{1}{k}\}$. $D$ is a zero set iff each $D_k$ is a zero set. (Rm. $osc_a(f)$ is defined with right limit.)
+
+    ​	"Only if" Boundedness is proved before. Let $\epsilon>0,k\in\N$ be given. We have a partition $P$ s.t. $U-L=\sum(M_i-m_i)\Delta x_i<\frac{\epsilon}{k}$. For each $P-$interval $I_i$, we say it is "bad" if it contains a point of $D_k$ in <u>its interior</u>. We have 
+    $$
+    \frac{\epsilon}{k}>U-L=\sum(M_i-m_i)\Delta x_i\ge\sum_{bad}(M_i-m_i)\Delta x_i\ge \frac{1}{k}\sum_{bad}\Delta x_i
+    $$
+    Thus the sum of the lengths of bad intervals is $<\epsilon$. Notice that $D_k\cap P$ is finite, thus it's a zero set. And $D_k-P$ is contained in finitely many open intervals whose total length is $<\epsilon$. Therefore $D_k$ is a zero set. Hence $D$ is a zero set.
+
+    ​	"If" Suppose $D$ is a zero set and $f$ is bounded, i.e., $f:[a,b]\to[-M,M]$. We prove that we can find $P$ with $U(f,P)-L(f,P)<\epsilon$ for all $\epsilon$. Let $k\in\N$ be s.t.
+    $$
+    \frac{1}{k}<\frac{\epsilon}{2(b-a)}
+    $$
+    There is a countable covering $\mathcal J$ of $D_k$ by open intervals $J_j=(a_j,b_j)$ with total length $\sum(b_j-a_j)\le\frac{\epsilon}{4M}$. Notice that each $J_j$ is a "bad" set. On the other hand, for each $x\in[a,b]-D_k$, there is an open $I_x$ containing $x$ s.t. 
+    $$
+    sup\{f(t)\ |\ t\in I_x\}-inf\{f(t)\ |\ t\in I_x\}<\frac{1}{k}
+    $$
+    These intervals form a covering $\mathcal I$ of the good set $[a,b]-D_k$. The union $\mathcal V=\mathcal I\cup\mathcal J$ is an open covering of $[a,b]$. Compactness of $[a,b]$ implies that $\mathcal V$ has a Lebesgue number $\lambda>0$. Let $P$ be any partition with $mesh(P)<\lambda$. We claim that $U(f,P)-L(f,P)<\epsilon$. Each $P-$interval $I_i$ is contained wholly in some $I_x$ or wholly in some $J_j$ by the def. of Lebesgue number. Set $J=\{i\in \{1,2,...,n\}\ |\ I_i\text{ is contained in some bad interval }J_j\}$. Then
+    $$
+    \begin{align*}
+    U-L&=\sum_{i=1}^n(M_i-m_i)\Delta x_i\\&=\sum_{i\in J}(M_i-m_i)\Delta+\sum_{i\notin J}(M_i-m_i)\Delta x_i\\&\le \sum_{i\in J}2M\Delta x_i+\sum_{i\notin J}\frac{1}{k}\Delta x_i\\&\le 2M\sum_{j=1}^mb_j-a_j+\frac{b-a}{k}\\&\le\frac{\epsilon}{2}+\frac{\epsilon}{2}=\epsilon
+    \end{align*}
+    $$
+
+###### Cor.
+
+​	$f$ is piecewise continuous if $Disc(f)$ is ==finite==.
+
+​	Every continuous or bounded piecewise continuous function is RI.
+
+###### Cor.
+
+​	The characteristic function of $S\subset[a,b]$ is RI iff the boundary of $S$ is a zero set. (the boundary is the set of discontinuity of $\chi_S$)
+
+###### Cor.
+
+​	The product of RI functions $f\cdot h$ is RI.
+
+- Proof: The set of discontinuity is the union.
+
+###### Cor.
+
+​	If $f:[a,b]\to[c,d]$ is RI and $\phi:[c,d]\to\R$ is continuous, then $\phi\circ f$ is RI.
+
+- Proof: We have $Disc(\phi\circ f)\subset Disc(f)$, which is a zero set.
+
+###### Cor.
+
+​	If $f$ is RI, then $|f|$ is also RI.
+
+- Proof: Note that $h:y\to |y|$ is continuous. We have $|f|=h\circ f$.
+
+###### Cor.
+
+​	The restriction of a RI function is also RI.
+
+###### Cor.
+
+​	If $f:[a,b]\to\R$ is monotone, then $f$ is RI.
+
+- Proof: It suffices to prove that if $f$ is increasing then $f$ is RI. $f$ is clearly bounded. For  any $c\in Disc(f)$, we have $\lim_{x\to c^+}f(x)>\lim_{x\to c^-}f(x)$. We choose a rational $r$ between them. Thus $r$ represents a point of discontinuity. Therefore $Disc(f)$ is countable.
+
+###### Cor.
+
+​	A RI function $f:[a,b]\to[0,M]$ has integral zero iff $f(x)=0$ almost every where.
+
+- Proof: “Only if” BWC. Suppose $f$ has integral zero and $f(x)=0$ not almost every where, so we have $f(c)>0$ at some $c\in[a,b]-Disc(f)$. As $f$ is continuous at $c$, $\exist\delta>0$ s.t. $\forall x\in[c-\delta,c+\delta]$, we have $|f(x)-f(c)|<\frac{f(c)}{2}$. Thus $f(x)>\frac{f(c)}{2}$ for all $x\in[c-\delta,c+\delta]$. Hence $f>\frac{f(c)}{2}\chi_{[c-\delta,c+\delta]}$, where the latter has integral greater than 0, CONTR. “If” Clearly, as $L(f,P)=0$ for any $P$.
+
+###### Cor.
+
+​	If $f:[a,b]\to\R$ is RI and $\phi:[c,d]\to[a,b]$ is a homeomorphism whose inverse satisfies a Lipschitz condition, then $f\circ\phi$ is RI.
+
+- Proof: Assume that $\phi(c)=a,\phi(d)=b$ (i.e., $\phi$ is strictly increasing). For some constant $K$ and all $s,t\in[a,b]$, we have $|\phi^{-1}(s)-\phi^{-1}(t)|\le K|s-t|$.
+
+    ​	$f$ is bounded thus $f\circ\phi$ is bounded. Notice that $Disc(f\circ\phi)=\phi^{-1}(Disc(f))$. We show that it is a zero set. For any $\epsilon>0$, there is a countable open covering of $Disc(f)$ by intervals $(a_i,b_i)$ s.t. the total length is $\le\frac{\epsilon}{K}$. The homeomorphic intervals $(a_i',b_i')=\phi^{-1}((a_i,b_i))$ covers $Disc(f\circ\phi)$ and have total length
+    $$
+    \sum b_i'-a_i'\le K(b_i-a_i)\le\epsilon
+    $$
+    Note that we have $a_i'=\phi^{-1}(a_i),b_i'=\phi^{-1}(b_i)$.
+
+###### Cor.
+
+​	If $f\in\mathcal R$ and $\phi:[c,d]\to [a,b]$ is a $C^1$ diffeomorphism, then $f\circ\phi$ is RI.
+
+- Proof: We have $\phi^{-1}$ is also of $C^1$ class. $(\phi^{-1})'$ is continuous on a compact set implies its image is also compact. Thus we have $|\phi^{-1}(s)-\phi^{-1}(t)|\le K|s-t|$, where $K=\text{max}_{x\in[a,b]}|(\phi^{-1})'(x)|$.
+
+###### Rm.
+
+​	Composite of RI functions may not be RI. E.g.:
+$$
+f(x)=1\text{ if }x\ne 0, f(x)=0\text{ if }x=0\\g(x)=\frac{1}{q}\text{ if }x=\frac{p}{q},g(x)=0\text{ if }x\notin\Q,g(x)=1\text{ if }x=0
+$$
+Note that $g$ is discontinuous at every $q\in Q$ but continuous at irrational numbers. However, $f\circ g$ is discontinuous at every point.
+
+##### Fundamental Theorem of Calculus
+
+​	If $f:[a,b]\to\R$ is RI, then its indefinite integral
+$$
+F(x)=\int_a^xf(t)dt
+$$
+is a continuous function of $x$. The derivative of $F(x)$ exists and equals $f(x)$ at every point $x$ at which $f$ is continuous.
+
+- Proof: As $f$ is bounded, say $|f(x)|\le M$ for all $x$. We have $|F(y)-F(x)|=|\int_x^yf(t)dt|\le M|y-x|$. Thus $F$ is continuous. Suppose $f$ is continuous at $x$. Then $F'(x)=\lim_{h\to 0}\frac{\int_x^{x+h}f(t)dt}{h}$. 
+
+    ​	Let $m(x,h)=\inf\{f(s)\ |\ |s-x|\le|h|\},M(x,h)=\sup\{f(s)\ |\ |s-x|\le|h|\}$. We have 
+    $$
+    m(x,h)\cdot h\le \int_x^{x+h}f(t)dt\le M(x,h)\cdot h\Rightarrow m(x,h)\le \frac{\int_x^{x+h}f(t)dt}{h}\le M(x,h)
+    $$
+     so $F'(x)$ is sandwiched and all of them converge to $f(x)$ as $h\to 0$ as $f$ is continuous at $x$.
+
+###### Def. (Antiderivative)
+
+​	Let $G,g:[a,b]\to\R$. We say $G$ is an antiderivative of $g$ if $G'(x)=g(x)$ for all $x\in[a,b]$.
+
+- Cor.: Every continuous function has an antiderivative by FTC.
+
+###### Antiderivative Theorem
+
+​	An antiderivative of a RI function, if it exists, differs from the indefinite integral by a constant.
+
+- Proof: Let $f:[a,b]\to\R$ be RI and $G$ be an antiderivative of $f$. We assert that $\forall x\in [a,b]$, we have $G(x)=\int_a^xf(t)dt+C$ where $C$ is a constant. Partition $[a,x]$ as $a=x_0<x_1<...<x_n=x$ and choose $t_k\in[x_{k-1},x_k]$ s.t. $G(x_k)-G(x_{k-1})=G'(t_k)\Delta x_k$. Note that such $t_k$ exists by MVT. We have $G(x)-G(a)=\sum_{k=1}^nG(x_k)-G(x_{k-1})=\sum_{k=1}^nf(t_k)\Delta x_k$, which is a Riemann sum for $f$ on $[a,x]$. Since $f$ is RI, the Riemann sum converges to $F(x)$ as the mesh of partition tends to zero. Hence $G(x)-G(a)=F(x)$.
+
+###### ==Them==.
+
+​	There exists a continuous function $h:[0,1]\to\R$ whose derivative exists and equals 0 almost everywhere, but which is not constant.
+
+- Proof: (**Devil's staircase function/ Cantor function**) Each $x\in[0,1]$ has a base-3 expansion $(.\omega_1\omega_2...)_3$ where $x=\sum_{i=1}^\infty\frac{\omega_i}{3^i}$. Each $\omega_i$ is either 0, 1, or 2. If $x\in C$, the standard Cantor set, then $x$ has a **unique** expansion in which each $\omega_i$ is either 0 or 2. Let the function $h$ send $x\in C$ to
+    $$
+    h(x)=\sum_{i=1}^\infty\frac{\omega_i/2}{2^i}
+    $$
+    Note that $h$ has equal values at the endpoints of the discarded gap intervals, and we extend $h$ to points between the endpoints by letting it to be constant on each discarded interval. 
+
+    ​	Continuity: For any $\epsilon>0$, choose $n$ s.t. $\frac{1}{2^n}<\epsilon$ and let $\delta=\frac{1}{3^n}$. If $x,x'\in C$ have $|x-x'|<\delta$, then they lie in a common interval $C_a$ in $C^n$. Therefore the base-3 expansion of $x,x'$ agree for the first $n$ terms, which implies $|h(x)-h(x')|\le\sum_{j=n+1}^\infty\frac{1}{2^j}<\epsilon$. Thus gives the continuity on $C$. At stage $n$ in the Cantor set construction, we discard the open middle third of an interval $C_a=[l_a,l_a+\frac{1}{3^n}]$, where the left endpoint is $l_a=\sum_{i=1}^n\frac{a_i}{3^i}$ and each $a_i$ is 0 or 2. Thus the discarded interval is $(l_a+\frac{1}{3^{n+1}},l_a+\frac{2}{3^{n+1}})$, where $\frac{1}{3^{n+1}}=\sum_{j=n+2}^\infty\frac{2}{3^j}$. Therefore values of $h$ on both endpoints are equal.
+
+    ​	It's also clear that $h(0)=0,h(1)=1$.
+
+###### Integration by Substitution
+
+​	If $f\in\mathcal R$ and $g:[c,d]\to[a,b]$ is a continuously differentiable bijection with $g'>0$ (thus $g$ is a $C^1$ diffeomorphism), then $\int_a^bf(y)dy=\int_c^df(g(x))g'(x)dx$.
+
+- Proof: Firstly, $f\circ g$ is RI and $g'$ is continuous thus RI, so the second integral exists. Consider the Riemann sum $\sum f(g(t_i))g'(t_i)\Delta x_i$. Choose $t_i$ such that $g'(t_i)\Delta x_i=g(x_{i})-g(x_{i-1})=\Delta g(x_i)$. Hence it turns into a Riemann sum  of $f$ where $g(x_0)=a,g(x_n)=b$. Since $g$ is continuous, as $\max(\Delta x_i)\to 0$, $\max(\Delta g(x_i))\to 0$. Thus the integrals are equal.
+- Rm. It is actually sufficient to assume that $g'\in\mathcal R$.
+
+###### Integration by Parts
+
+​	If $f,g:[a,b]\to\R$ are differentiable and $f',g'\in\mathcal R$, then $\int_a^bf(x)g'(x)dx=f(b)g(b)-f(a)g(a)-\int_a^bf'(x)g(x)dx$.
+
+- Proof: Differentiability implies continuity implies RI. We have $(fg)'=f'g+g'f$ everywhere, so $fg$ is an antiderivative of $f'g+g'f$. By Antiderivative Theorem, we have $(fg)(x)-(fg)(a)=\int_a^xf'g+d'f\ dx$. Letting $x=b$ gives us the result.
+
+###### Improper Integral
+
+​	Assume $f:[a,b)\to\R$ is RI when restricted to any closed subinterval $[a,c]\subset[a,b)$. ($b=\infty$ is allowed) If $\lim_{c\to b}\int_a^cf(x)dx$ exists, then we define $\int_a^bf(x)dx=\lim_{c\to b}\int_a^cf(x)dx$.
+
+- ==Rm.== Suppose $f$ is RI for any $[a,c]\subset[a,b)$. If the improper integral $\int_a^b|f|dx$ exists, then $\int_a^bfdx$ exists. (Proof: Let $f^+$ be defined as $f^+(x)=f(x)$ if $f(x)>0$ and $f^+(x)=0$ otherwise, and let $f^-$ be defined similarly. Note that both of them are RI on any $[a,c]$. We have $f=f^++f^-$ and $|f|=f^+-f^-$. As $\int_a^b|f|dx$ exists, we have $\lim_{c\to b}\int_a^cf^+dx$ is bounded and increasing as $c$ increases, so the limit exists **(consider l.u.b. of $\{\int_a^cf^+dx\ |\ c\in[a,b)\}$; the limit exists in the sense that every sequence $(c_n)$ converging to $b$ leads the sequence $(\int_a^cf^+dx)$ converging to the l.u.b.)**. Similarly we have $f^-$ has an improper integral. Thus $f$ has an improper integral.)
+
+---
+
+##### Series
+
+​	A series is a formal sum $\sum a_k$ where $a_k$ are real numbers. The $n^{\text{th}}$ partial sum of the series is $s_n=A_n=a_0+...+a_n$. (Vasiu: $k$ starts with 1)
+
+​	The series converges to a real number $A$ (or $s$) if $s_n=A_n\to s=A$ as $n\to\infty$. A series that does not converge diverges.
+
+- Rm. A series converges implies $(a_n)$ converges to 0. (Proof: We have $(s_n)$ is a convergent sequence, Consider $(s_{n+1}-s_n)$)
+- ==Rm.== Everyone knows that the harmonic series diverges, but is every subseries of the harmonic series diverges? The answer is no. **Kempner series**, a series constructed out of the harmonic series by omitting every term whose denominator expressed in base 10 contains a digit 9, converges to around 22. (Quick explanation: for large numbers, it's every likely to have a 9 in its base 10 expression.)
+
+###### Cauchy Convergence Criterion
+
+​	$\sum a_k$ converges iff $\forall\epsilon>0,\exist N\in\N$ s.t. $\forall m,n\ge N$, we have $|\sum_{k=m}^n a_k|<\epsilon$.
+
+- Proof: "Only if" easy. "If" consider the Cauchy sequence $(s_k)$.
+
+- ==Lemma.== Let $\sum a_n$ be a series and $(b_n)$ be a sequence. If the following 2 conditions hold, then the series $\sum a_nb_n$ is convergent.
+
+    1. Partial sums of $\sum a_n$ are bounded, i.e., $\exist S$ s.t. $|s_n|\le S$ for all $n$.
+    2. $(b_n)$ <u>monotonically</u> converges to 0, i.e., either decreasing or increasing to 0.
+
+    - Proof: We prove only the case $(b_n)$ <u>decreases</u> to 0 (the other case is a direct result of this case). For any $\epsilon>0$, let $N$ be s.t. $b_n<\frac{\epsilon}{2S}$ for all $n\ge N$. Then, for any $n\ge m\ge N$ we have 
+        $$
+        \begin{align*}
+        |\sum_{i=m}^na_ib_i|&=|\sum_{i=m}^n(s_{i}-s_{i-1})b_i|\\&=|\sum_{i=m}^{n-1}s_i(b_i-b_{i+1})+s_nb_n-s_{m-1}b_m|\\&\le S\sum_{i=m}^{n-1}|b_i-b_{i+1}|+Sb_n+Sb_m\\&=S(b_m-b_n)+S(b_n+b_m)<\epsilon
+        \end{align*}
+        $$
+        Q.E.D.
+
+###### Comparison Test
+
+​	Suppose $|a_k|\le b_k$ for all $k\ge\text{ some } K\in\N$. Then if $\sum b_k$ converges, then $\sum a_k$ converges.
+
+- Proof: We have $|\sum_{k=m}^n a_k|\le \sum_{k=m}^n|a_k|\le \sum_{k=m}^n b_k$.
+
+###### Absolute and conditional convergence
+
+​	A series $\sum a_k$ converges absolutely if $\sum |a_k|$ converges, conditionally ==if $\sum a_k$ converges but not $\sum|a_k|$==.
+
+- Rm. We can prove that alternating harmonic series converges conditionally.
+- Rm. If $\sum|a_n|$ converges, then $\sum a_n$ converges. (Proof: We have $|\sum_{i=m}^na_i|\le \sum_{i=m}^n|a_i|$)
+
+###### Alternating series
+
+​	Let $(b_k)$ be a ==positive *decreasing sequence* converging to 0==. Then $\sum a_k$ where $a_k=(-1)^{k-1}b_k$ converges.
+
+- Proof: We have $\sum a_k=b_1-b_2+b_3-b_4+...$. Note that $(s_{2k})$ is an increasing sequence and each $s_k$ is less than or equal to $b_1$. Thus $(s_{2k})$ converges as it is increasing and bounded from above. Also, we have $(s_{2k+1})=(s_{2k}+a_{2k+1})$, where $(a_{2k+1})$ converges to 0. Thus $(s_k)$ converges.
+
+###### Integral test
+
+​	Suppose that $\int_1^\infty f(x)dx$ is a given improper integral and $\sum a_k$ is a given series.
+
+1. If $|a_k|\le f(x)$ for all $k\ge\text{ some }K\in\N$ and all $x\in(k-1,k]$, then convergence of the improper integral implies convergence of the series.
+2. If $|f(x)|\le a_k$ for all $k\ge\text{ some }K\in\N$ and all $x\in[k,k+1)$, then divergence of the improper integral implies divergence of the series (or the convergence of the series implies the convergence of the improper integral).
+
+- Proof: 1 If $N_0\ge K$, then, $\forall N\ge N_0$, we have $\sum_{k=N_0}^N|a_k|\le \int_{N_0-1}^Nf(x)dx\le \int_0^\infty f(x)dx$, which is a finite number. Hence $\sum_{k=N_0}^N|a_k|$ is a convergent sequence as $N\to\infty$ (it is bounded from above and increasing). Thus the whole series $\sum |a_k|$ converges.
+
+---
+
+- Rm. The **exponential growth rate** of a series $\sum a_m$ is $\alpha=\lim_{m\to\infty}\sup{|a_m|}^{1/m}$.
+    - E.g. $\sum a^n$ has exponential growth rate $a$.
+- Rm. $\bar\R=\R\cup\{\infty,-\infty\}$, a compactification of $\R$. For any $A\subset\bar\R$, we say $A$ is open if $\forall x\in A$, either (1) $\exist(x-\epsilon,x+\epsilon)\subset A$ if $x\in\R$, (2) $\exist (m,\infty]\subset A$ if $x=\infty$, (3) $\exist [-\infty,m)\subset A$ if $x=-\infty$.
+
+###### ==Rm (Vasiu)==.
+
+​	For a sequence $(x_n)$ in $\R$, define $L=\{l\in\bar\R\ |\ \exist(x_{n_k})_{k\ge 1}\text{ whose limit is }l\}$ (or the set of all limit points of the sequence).
+
+- Claim: $L$ is closed.
+    - Proof: For any $b\in L'$, if $b\in\R$, we have a sequence $(l_n)$ converging to $b$. For each $m\in\N$, choose $l_i$ s.t. $|l_i-b|<\frac{1}{2m}$ and choose $x_b$ s.t. $|x_j-l_i|<\frac{1}{2m}$. Thus we construct a subsequence of $(x_n)$ converging to $b$. Therefore $b\in L$. If $b=\infty$, then clearly we can construct a sequence of $(x_n)$ going to infinity.
+
+Therefore $L$ is closed and thus compact in $\bar \R$. Being compact in order topology implies it has maximum and minimum. Define $\lim_{n\to\infty}\inf(x_n)=\min(L),\lim_{n\to\infty}\sup(x_n)=\max(L)$.
+
+​	Textbook definition: Let $M_N=\sup\{x_N,x_{N+1},...\}$, define $\lim_{n\to\infty}\sup(x_n)=\lim_{N\to\infty}M_N$.
+
+###### Root test
+
+​	For series $\sum a_m$, let $\alpha=\lim_{m\to\infty}\sup{|a_m|}^{1/m}$. If $\alpha<1$, then the series converges; if $\alpha>1$, then the series diverges. If $\alpha=1$, then the root test is inconclusive.
+
+- Proof: If $\alpha<1$, choose $\alpha<\beta<1$, then we have $|a_n|^{1/n}\le\beta$, i.e., $|a_n|\le\beta^n$ for all $n\ge\text{ some } N$ (Rm. there can't be infinite terms of $|a_n|^{1/n}\ge\beta$, due to the compactness of $\bar\R$). If $\alpha>1$, then $\exist 1<\beta<\alpha$ s.t. $|a_n|\ge \beta^n>1$ for infinitely many terms, so $a_n$ do not converge to 0.
+
+###### Ratio test
+
+​	For series $\sum a_n$, let $r_n=|\frac{a_{n+1}}{a_n}|$, and let $\rho=\lim_{n\to\infty}\sup r_n,\lambda=\lim_{n\to\infty}\inf r_n$. If $\rho<1$, then the series converges; if $\lambda>1$, then the series diverges. In other cases the ratio test is in conclusive.
+
+- Proof: If $\rho<1$, choose $\rho<\beta<1$ and for large enough $n$, we have $|a_{n+1}|\le \beta|a_n|$. If $\lambda>1$, choose $1<\beta<\lambda$. Then we have $|a_{n+1}|\ge\beta|a_n|$ for all $n\ge\text{ some }N$, so $a_n$ do not converge to 0.
+- Rm. In case $\rho\ge1,\lambda\le1$, the discussion can be very complicated. We can have infinite terms of $r_n>\beta>1$ while the sequence $(a_n)$ still converges to 0.
+
+---
+
+##### Series of Functions
+
+###### Radius of Convergence Theorem
+
+​	If $\sum_{n\ge 0} a_nx^n$ is a power series, then there exists a unique $0\le R\le\infty$ s.t. the series converges if $|x|<R$ and diverges if $|x|>R$. Moreover, $R$ is given by $R=\frac{1}{\lim_{n\to\infty}\sup|a_n|^{1/n}}$.
+
+- Proof: Apply the root test we have $\lim_{n\to\infty}\sup|a_nx^n|^{1/n}=|x|\lim_{n\to\infty}\sup|a_n|^{1/n}=\frac{|x|}{R}$.
